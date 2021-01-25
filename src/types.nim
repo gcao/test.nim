@@ -3,11 +3,12 @@ type
     name*: string
 
   Add*  = proc(a: A) {.nimcall.}
-  Init* = proc(v: ptr seq[A]) {.nimcall.}
+  Init* = proc(v: ref seq[A]) {.nimcall.}
 
-var As*: seq[A] = @[]
+var As*: ref seq[A]
+new(As)
 
-proc init*(v: ptr seq[A]) =
+proc init*(v: ref seq[A]) =
   echo "In init()"
   echo v[].len
-  As = cast[seq[A]](v[])
+  As = v

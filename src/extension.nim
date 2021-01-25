@@ -1,10 +1,12 @@
-{.push dynlib exportc.}
-
 import ./types
 
-proc add*(a: A) =
-  As.add(a)
+{.push dynlib exportc.}
 
-export init
+include ./ext_common
+
+proc add*(a: A) =
+  echo "In add()"
+  echo "As.len = " & $As[].len
+  As[].add(a)
 
 {.pop.}
